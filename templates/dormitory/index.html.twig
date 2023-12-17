@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dormitory List{% endblock %}
+
+{% block body %}
+    <h1>Dormitory List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Keywords</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>Detail</th>
+                <th>Userid</th>
+                <th>Rooms</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dormitory in dormitories %}
+            <tr>
+                <td>{{ dormitory.id }}</td>
+                <td>{{ dormitory.title }}</td>
+                <td>{{ dormitory.keywords }}</td>
+                <td>{{ dormitory.description }}</td>
+                <td>{{ dormitory.image }}</td>
+                <td>{{ dormitory.address }}</td>
+                <td>{{ dormitory.phone }}</td>
+                <td>{{ dormitory.email }}</td>
+                <td>{{ dormitory.city }}</td>
+                <td>{{ dormitory.status }}</td>
+                <td>{{ dormitory.createdAt ? dormitory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ dormitory.updatedAt ? dormitory.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ dormitory.detail }}</td>
+                <td>{{ dormitory.userid }}</td>
+
+                <td>
+                   <a href="{{ path('app_dormitory_new', {'id': dormitory.id}) }}">Go Room Info</a>
+                </td>
+
+                <td>
+                    <a href="{{ path('app_dormitory_show', {'id': dormitory.id}) }}">show</a>
+                    <a href="{{ path('app_dormitory_edit', {'id': dormitory.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_dormitory_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Dormitory index{% endblock %}
+
+{% block body %}
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Dormitory List</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+              <li class="breadcrumb-item active">Dormitory List</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Category List Table</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+    <h1>Dormitory index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Keywords</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dormitory in dormitories %}
+            <tr>
+                <td>{{ dormitory.id }}</td>
+                <td>{{ dormitory.title }}</td>
+                <td>{{ dormitory.keywords }}</td>
+                <td>{{ dormitory.description }}</td>
+                <td>{{ dormitory.image }}</td>
+                <td>{{ dormitory.address }}</td>
+                <td>{{ dormitory.phone }}</td>
+                <td>{{ dormitory.email }}</td>
+                <td>{{ dormitory.city }}</td>
+                <td>{{ dormitory.status }}</td>
+                <td>{{ dormitory.createdAt ? dormitory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ dormitory.updatedAt ? dormitory.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin/app_dormitory_show', {'id': dormitory.id}) }}">show</a>
+                    <a href="{{ path('admin/app_dormitory_edit', {'id': dormitory.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+             <a href="{{ path('app_dormitory_new') }}">Create new</a>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+    </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          Footer
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock %}

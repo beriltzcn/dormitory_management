@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Userid</th>
+                <th>Dormitoryid</th>
+                <th>Roomid</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Save_time</th>
+                <th>End_time</th>
+                <th>Ip</th>
+                <th>Status</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.userid }}</td>
+                <td>{{ reservation.dormitoryid }}</td>
+                <td>{{ reservation.roomid }}</td>
+                <td>{{ reservation.name }}</td>
+                <td>{{ reservation.surname }}</td>
+                <td>{{ reservation.email }}</td>
+                <td>{{ reservation.phone }}</td>
+                <td>{{ reservation.saveTime ? reservation.saveTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.endTime ? reservation.endTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.ip }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>{{ reservation.createdAt ? reservation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.updatedAt ? reservation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_reservation_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('app_admin_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_reservation_new') }}">Create new</a>
+{% endblock %}

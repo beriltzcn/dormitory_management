@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{dormitory.title}}{% endblock %}
+
+{% block body %}
+    <h1>{{dormitory.title}}</h1>
+
+    {{ include('admin/room/_form.html.twig') }}
+
+     <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Dormitoryid</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Number</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.id }}</td>
+                <td>{{ room.title }}</td>
+                <td>{{ room.dormitoryid }}</td>
+                <td>{{ room.description }}</td>
+                <td>{{ room.image }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.status }}</td>
+                <td>{{ room.number }}</td>
+                <td>
+                    <a href="{{ path('app_admin_room_edit', {'id': room.id}) }}" class="btn btn-success">Edit</a>
+                </td>
+                <td>
+                 <form method="post" action="{{ path('app_admin_room_delete', {'id': room.id, 'did':dormitory.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                   <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ room.id) }}">
+                   <button class="btn btn-danger">Delete</button>
+                 </form>
+                </td>
+                   
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
